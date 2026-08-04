@@ -17,7 +17,7 @@ import {
 import { Edit, Loader2, SquarePlus } from "lucide-react";
 import { useCategory } from "../../hooks/useCategory";
 import { ButtonConfig } from "@/config/ButtonConfig";
-import { CATEGORY_IMAGE_URL } from "@/config/BaseUrl";
+import { CATEGORY_IMAGE_URL, NO_IMAGE_URL } from "@/config/BaseUrl";
 import { useState, useEffect } from "react";
 
 const CategoryFormDialog = ({ categoryId }) => {
@@ -132,17 +132,14 @@ const CategoryFormDialog = ({ categoryId }) => {
                     }}
                     className="flex-1"
                   />
-                  {(imagePreview || formData.category_image) && (
-                    <img
-                      src={imagePreview || `${CATEGORY_IMAGE_URL}/${formData.category_image}`}
-                      alt="Category Preview"
-                      className="h-16 w-16 rounded border object-cover shrink-0"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        // Avoid infinite loop if placeholder fails
-                      }}
-                    />
-                  )}
+                  <img
+                    src={imagePreview || (formData.category_image ? `${CATEGORY_IMAGE_URL}/${formData.category_image}` : NO_IMAGE_URL)}
+                    alt="Category Preview"
+                    className="h-16 w-16 rounded border object-cover shrink-0"
+                    onError={(e) => {
+                      e.target.src = NO_IMAGE_URL;
+                    }}
+                  />
                 </div>
               </div>
 

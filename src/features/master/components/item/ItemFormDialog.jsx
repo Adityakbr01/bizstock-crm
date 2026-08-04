@@ -305,16 +305,15 @@ const ItemFormDialog = ({ itemId }) => {
                       className="flex-1"
                     />
 
-                    {(imagePreview || formData.item_image) && (
-                      <img
-                        src={
-                          imagePreview || `${IMAGE_URL}/${formData.item_image}`
-                        }
-                        alt="Preview"
-                        className="h-20 w-20 rounded border object-cover shrink-0"
-                        onError={(e) => { e.target.src = NO_IMAGE_URL; }}
-                      />
-                    )}
+                    <img
+                      src={
+                        imagePreview || 
+                        (formData.item_image ? `${IMAGE_URL}/${formData.item_image}` : NO_IMAGE_URL)
+                      }
+                      alt="Preview"
+                      className="h-20 w-20 rounded border object-cover shrink-0"
+                      onError={(e) => { e.target.src = NO_IMAGE_URL; }}
+                    />
                   </div>
                 </div>
 
@@ -344,16 +343,15 @@ const ItemFormDialog = ({ itemId }) => {
                       className="flex-1"
                     />
 
-                    {(otherImagePreview || formData.item_other_image) && (
-                      <img
-                        src={
-                          otherImagePreview || `${IMAGE_URL}/${formData.item_other_image}`
-                        }
-                        alt="Other Preview"
-                        className="h-20 w-20 rounded border object-cover shrink-0"
-                        onError={(e) => { e.target.src = NO_IMAGE_URL; }}
-                      />
-                    )}
+                    <img
+                      src={
+                        otherImagePreview || 
+                        (formData.item_other_image ? `${IMAGE_URL}/${formData.item_other_image}` : NO_IMAGE_URL)
+                      }
+                      alt="Other Preview"
+                      className="h-20 w-20 rounded border object-cover shrink-0"
+                      onError={(e) => { e.target.src = NO_IMAGE_URL; }}
+                    />
                   </div>
                 </div>
               </div>

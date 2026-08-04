@@ -12,10 +12,6 @@ import { IMAGE_URL, NO_IMAGE_URL } from "@/config/BaseUrl";
 const ItemViewDialog = ({ item }) => {
   if (!item) return null;
 
-  const images = [];
-  if (item.item_image) images.push({ label: "Item Image", url: `${IMAGE_URL}/${item.item_image}` });
-  if (item.item_other_image) images.push({ label: "Other Image", url: `${IMAGE_URL}/${item.item_other_image}` });
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -34,45 +30,30 @@ const ItemViewDialog = ({ item }) => {
         <div className="flex flex-col gap-6 py-4 animate-in fade-in duration-300">
           {/* Images Gallery */}
           <div className="bg-yellow-50/50 p-4 rounded-xl border border-yellow-100/50">
-            {images.length === 0 ? (
-              <div className="flex justify-center">
+            <div className="grid grid-cols-2 gap-4 w-full">
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="text-xs text-yellow-800 font-medium">Item Image</span>
                 <img
-                  src={NO_IMAGE_URL}
-                  alt="No image"
-                  className="max-h-52 object-contain rounded-lg shadow-sm bg-white"
-                />
-              </div>
-            ) : images.length === 1 ? (
-              <div className="flex flex-col items-center gap-1.5 justify-center">
-                <span className="text-xs text-yellow-800 font-medium">{images[0].label}</span>
-                <img
-                  src={images[0].url}
-                  alt={images[0].label}
-                  className="max-h-52 object-contain rounded-lg shadow-sm border border-white bg-white"
+                  src={item.item_image ? `${IMAGE_URL}/${item.item_image}` : NO_IMAGE_URL}
+                  alt="Item"
+                  className="h-36 object-contain rounded-lg shadow-sm border border-white bg-white w-full"
                   onError={(e) => {
                     e.target.src = NO_IMAGE_URL;
                   }}
                 />
               </div>
-            ) : (
-              <div className={`grid gap-4 ${images.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
-                {images.map((img, idx) => (
-                  <div key={idx} className="flex flex-col items-center gap-1.5">
-                    <span className="text-[10px] text-yellow-800 font-semibold truncate max-w-full">
-                      {img.label}
-                    </span>
-                    <img
-                      src={img.url}
-                      alt={img.label}
-                      className="h-28 w-full object-contain rounded-lg shadow-sm border border-white bg-white"
-                      onError={(e) => {
-                        e.target.src = NO_IMAGE_URL;
-                      }}
-                    />
-                  </div>
-                ))}
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="text-xs text-yellow-800 font-medium">Other Image</span>
+                <img
+                  src={item.item_other_image ? `${IMAGE_URL}/${item.item_other_image}` : NO_IMAGE_URL}
+                  alt="Other"
+                  className="h-36 object-contain rounded-lg shadow-sm border border-white bg-white w-full"
+                  onError={(e) => {
+                    e.target.src = NO_IMAGE_URL;
+                  }}
+                />
               </div>
-            )}
+            </div>
           </div>
 
           {/* Details Grid */}

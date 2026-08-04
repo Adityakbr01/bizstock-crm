@@ -54,16 +54,14 @@ const ItemPage = () => {
                 e.target.src = NO_IMAGE_URL;
               }}
             />
-            {img2 && (
-              <img
-                src={`${IMAGE_URL}/${img2}`}
-                alt="Secondary"
-                className="h-10 w-10 rounded border object-cover shadow-sm bg-gray-50 shrink-0"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
-            )}
+            <img
+              src={img2 ? `${IMAGE_URL}/${img2}` : NO_IMAGE_URL}
+              alt={`${row.original.item_name} secondary`}
+              className="h-10 w-10 rounded border object-cover shadow-sm bg-gray-50 shrink-0"
+              onError={(e) => {
+                e.target.src = NO_IMAGE_URL;
+              }}
+            />
           </div>
         );
       },
